@@ -8,11 +8,22 @@ public class FPSInput : MonoBehaviour
     [SerializeField] private float speed = 9f;
     [SerializeField] private CharacterController cc;
 
-    private float gravity = -9.81f;
+    private float gravity;
     private float yVelocity = 0f;
     private float yVelocityOnGround = -4f;
 
-    // Update is called once per frame
+    private float jumpHeight = 3f;
+    private float jumpTime = 0.5f;
+    private float initialJumpVelocity;
+
+    void Start()
+    {
+        float timeToApex = jumpTime / 2f;
+        gravity = (-2 * jumpHeight) / Mathf.Pow(timeToApex, 2);
+
+        initialJumpVelocity = Mathf.Sqrt(jumpHeight * -2 * gravity);
+    }
+
     void Update()
     {
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -28,6 +39,11 @@ public class FPSInput : MonoBehaviour
         if (cc.isGrounded && yVelocity < 0.0)
         {
             yVelocity = yVelocityOnGround;
+        }
+
+        if (Input.GetButtonDown("Jump") && cc.isGrounded)
+        {
+            yVelocity = initialJumpVelocity;
         }
 
         movement.y = yVelocity;
