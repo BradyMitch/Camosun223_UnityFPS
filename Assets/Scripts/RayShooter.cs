@@ -6,14 +6,14 @@ public class RayShooter : MonoBehaviour
 {
 
     [SerializeField] private Camera cam;
-    [SerializeField] private int aimSize = 16;
+    //[SerializeField] private int aimSize = 16;
 
     // Start is called before the first frame update
     void Start()
     {
         // hide the mouse cursor 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -54,13 +54,13 @@ public class RayShooter : MonoBehaviour
 
     void OnGUI()
     {
-        GUIStyle style = new GUIStyle();
+        /*GUIStyle style = new GUIStyle();
         style.fontSize = aimSize;
 
         // find the center of the camera view and adjust for asterisk  
         float posX = cam.pixelWidth / 2 - aimSize / 4;
         float posY = cam.pixelHeight / 2 - aimSize / 2;
 
-        GUI.Label(new Rect(posX, posY, aimSize, aimSize), "+", style);
+        GUI.Label(new Rect(posX, posY, aimSize, aimSize), "+", style);*/
     }
 }
