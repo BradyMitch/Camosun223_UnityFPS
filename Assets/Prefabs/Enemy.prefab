@@ -1663,6 +1663,7 @@ GameObject:
   - component: {fileID: 908197795837521916}
   - component: {fileID: 908197795837521907}
   - component: {fileID: 908197795837521917}
+  - component: {fileID: 2218751943234512103}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -1741,3 +1742,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laserbeamPrefab: {fileID: 1218862499310183183, guid: 66ab7c4771a49df47bcb3c158a8e8e59, type: 3}
   fireRate: 2
+--- !u!95 &2218751943234512103
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9204086616918438197}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
+  m_Controller: {fileID: 9100000, guid: c2fc997b0a10f954d940b8ce50a7edcd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

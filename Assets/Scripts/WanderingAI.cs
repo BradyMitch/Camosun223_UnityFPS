@@ -7,7 +7,7 @@ public enum EnemyStates { alive, dead };
 public class WanderingAI : MonoBehaviour
 {
 
-    private float enemySpeed = 3.0f;
+    private float enemySpeed = 1.75f;
     private float obstacleRange = 5.0f;
     private float sphereRadius = 1f;
 
