@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class PlayerCharacter : MonoBehaviour
 {
-
+    private int maxHealth = 5;
     private int health;
 
     // Use this for initialization 
     void Start()
     {
-        health = 5;
+        health = maxHealth;
     }
 
     public void Hit()
     {
         health -= 1;
-        Debug.Log("Health: " + health);
+        float healthPercentage = (float)health / (float)maxHealth;
+        Messenger<float>.Broadcast(GameEvent.HEALTH_CHANGED, healthPercentage);
+        Debug.Log("Health: " + health + ", percentage: " + healthPercentage);
         if (health == 0)
         {
             Debug.Break();

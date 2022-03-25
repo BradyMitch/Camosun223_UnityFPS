@@ -6,7 +6,20 @@ public class RayShooter : MonoBehaviour
 {
 
     [SerializeField] private Camera cam;
+    private bool isActive = true;
     //[SerializeField] private int aimSize = 16;
+
+    void Awake()
+    {
+        Messenger.AddListener(GameEvent.GAME_ACTIVE, this.OnActive);
+        Messenger.AddListener(GameEvent.GAME_INACTIVE, this.OnInActive);
+    }
+
+    void OnDestroy()
+    {
+        Messenger.AddListener(GameEvent.GAME_ACTIVE, this.OnActive);
+        Messenger.AddListener(GameEvent.GAME_INACTIVE, this.OnInActive);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +32,7 @@ public class RayShooter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && isActive)
         {
             Vector3 point = new Vector3(cam.pixelWidth / 2, cam.pixelHeight / 2, 0);
             Ray ray = cam.ScreenPointToRay(point);
@@ -40,6 +53,16 @@ public class RayShooter : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void OnActive()
+    {
+        isActive = true;
+    }
+
+    private void OnInActive()
+    {
+        isActive = false;
     }
 
     private IEnumerator SphereIndicator(Vector3 hitPosition)
