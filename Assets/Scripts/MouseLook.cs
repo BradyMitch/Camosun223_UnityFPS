@@ -20,8 +20,8 @@ public class MouseLook : MonoBehaviour
 
     void OnDestroy()
     {
-        Messenger.AddListener(GameEvent.GAME_ACTIVE, this.OnActive);
-        Messenger.AddListener(GameEvent.GAME_INACTIVE, this.OnInActive);
+        Messenger.RemoveListener(GameEvent.GAME_ACTIVE, this.OnActive);
+        Messenger.RemoveListener(GameEvent.GAME_INACTIVE, this.OnInActive);
     }
 
     public RotationAxes axes = RotationAxes.MouseXAndY;

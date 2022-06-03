@@ -16,6 +16,8 @@ public class FPSInput : MonoBehaviour
     private float jumpTime = 0.5f;
     private float initialJumpVelocity;
 
+    private float pushForce = 5.0f;
+
     void Start()
     {
         float timeToApex = jumpTime / 2f;
@@ -48,5 +50,15 @@ public class FPSInput : MonoBehaviour
 
         movement.y = yVelocity;
         cc.Move(movement * Time.deltaTime);
+    }
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        Rigidbody body = hit.collider.attachedRigidbody;
+        // does it have a rigidbody and is Physics enabled?
+        if (body != null && !body.isKinematic)
+        {
+            body.velocity = hit.moveDirection * pushForce;
+        }
     }
 }

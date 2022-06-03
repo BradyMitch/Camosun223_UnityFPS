@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
@@ -26,12 +27,26 @@ public class SceneController : MonoBehaviour
     {
         Messenger.AddListener(GameEvent.ENEMY_DEAD, this.OnEnemyDead);
         Messenger<int>.AddListener(GameEvent.DIFFICULTY_CHANGED, this.OnDifficultyChanged);
+        Messenger.AddListener(GameEvent.PLAYER_DEAD, this.OnPlayerDead);
+        Messenger.AddListener(GameEvent.RESTART_GAME, this.OnRestartGame);
     }
 
     void OnDestroy()
     {
         Messenger.RemoveListener(GameEvent.ENEMY_DEAD, this.OnEnemyDead);
         Messenger<int>.RemoveListener(GameEvent.DIFFICULTY_CHANGED, this.OnDifficultyChanged);
+        Messenger.RemoveListener(GameEvent.PLAYER_DEAD, this.OnPlayerDead);
+        Messenger.RemoveListener(GameEvent.RESTART_GAME, this.OnRestartGame);
+    }
+
+    public void OnRestartGame()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    private void OnPlayerDead()
+    {
+        ui.ShowGameOverPopup();
     }
 
     void OnEnemyDead()

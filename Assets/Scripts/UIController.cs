@@ -15,6 +15,7 @@ public class UIController : MonoBehaviour
 
     [SerializeField] private OptionsMenu optionsMenu;
     [SerializeField] private SettingsMenu settingsMenu;
+    [SerializeField] private GameOverPopup gameOverPopup;
 
     private int popupsOpen = 0;
 
@@ -28,8 +29,8 @@ public class UIController : MonoBehaviour
     void OnDestroy()
     {
         Messenger<float>.RemoveListener(GameEvent.HEALTH_CHANGED, this.OnHealthChanged);
-        Messenger.AddListener(GameEvent.POPUP_OPENED, this.OnPopupsOpened);
-        Messenger.AddListener(GameEvent.POPUP_CLOSED, this.OnPopupsClosed);
+        Messenger.RemoveListener(GameEvent.POPUP_OPENED, this.OnPopupsOpened);
+        Messenger.RemoveListener(GameEvent.POPUP_CLOSED, this.OnPopupsClosed);
     }
 
     // Start is called before the first frame update
@@ -63,6 +64,7 @@ public class UIController : MonoBehaviour
             Debug.Log("GameActive");
             Messenger.Broadcast(GameEvent.GAME_ACTIVE);
             Time.timeScale = 1;                        // unpause the game 
+            Cursor.visible = false; // hide cursor
             Cursor.lockState = CursorLockMode.Locked;  // show the cursor 
             crossHair.gameObject.SetActive(true);      // show the crosshair 
         }
@@ -71,6 +73,7 @@ public class UIController : MonoBehaviour
             Debug.Log("GameInActive");
             Messenger.Broadcast(GameEvent.GAME_INACTIVE);
             Time.timeScale = 0;                       // pause the game 
+            Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;   // show the cursor 
             crossHair.gameObject.SetActive(false);    // turn off the crosshair 
         }
@@ -103,5 +106,10 @@ public class UIController : MonoBehaviour
         {
             SetGameActive(true);
         }
+    }
+
+    public void ShowGameOverPopup()
+    {
+        gameOverPopup.Open();
     }
 }
